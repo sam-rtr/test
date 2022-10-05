@@ -13,6 +13,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    env:
+      token: ${{ secrets.SLACK_BOT_TOKEN }} 
     strategy:
       fail-fast: false
       matrix:
@@ -29,5 +31,5 @@ jobs:
         python -m pip install --upgrade pip
         pip install requests
         pip install slackclient
-        python -c "import requests; import json; import versionDiff; token=${{ secrets.SLACK_BOT_TOKEN }}; versionDiff.sendVersionDiffsToSlack(token)"
+        python -c "import requests; import json; import versionDiff; versionDiff.sendVersionDiffsToSlack('${{ secrets.SLACK_BOT_TOKEN}} ')"
       working-directory: scripts
