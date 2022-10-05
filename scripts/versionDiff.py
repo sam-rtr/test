@@ -113,6 +113,6 @@ def sendVersionDiffsToSlack(slack_bot_token):
     #         result += f"`{key}: {diffDict[key][0]} --> {diffDict[key][1]}`\n"
     # else:
     #     result = "Could not fetch Version information. (From versionDiff.py)"
-    print(slack_bot_token)
+    print()
     client = WebClient(token=slack_bot_token)
-    client.chat_postMessage(channel="#api-integration-tests", text="hello")
+    client.chat_postMessage(channel="#test", text="hello")
