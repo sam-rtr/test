@@ -122,7 +122,7 @@ def sendVersionDiffsToSlack(slack_bot_token, channel, thread_id=None):
             'thread_ts': thread_id
             }
         )
-     else:
+    else:
         client.api_call(
             api_method='chat.postMessage',
             json={
