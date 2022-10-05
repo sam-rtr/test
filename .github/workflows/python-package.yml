@@ -36,5 +36,5 @@ jobs:
       working-directory: scripts
       
     - name: Print
-      if: steps.send-version-diff.outcome == 'success'
+      if: steps.send-version-diff.outcome == 'somethingelse'
       run: echo steps.send-version-diff.outcome
