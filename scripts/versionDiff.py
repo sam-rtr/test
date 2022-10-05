@@ -92,9 +92,6 @@ def checkDiffVersion():
     diff_in_versions = {k: [old_versions_stored[k], new_service_versions[k]]
                         for k in old_versions_stored if k in new_service_versions and old_versions_stored[k] != new_service_versions[k]}
 
-    # version_diff_msg_string = str(sorted("%s : %s --> %s" % (k, diff_in_versions[k][0], diff_in_versions[k][1])
-    #                                       for k, v in diff_in_versions.items()))
-
     writeToFile(new_service_versions)
 
     if len(diff_in_versions) == 0:
@@ -102,17 +99,24 @@ def checkDiffVersion():
     else:
         return diff_in_versions
 
-def sendVersionDiffsToSlack(slack_bot_token):
-    # diffDict = checkDiffVersion()
-    # result = ""
+def sendVersionDiffsToSlack(slack_bot_token, thread_id):
+    diffDict = checkDiffVersion()
+    result = ""
 
-    # if(isinstance(diffDict, str)):
-    #     result = "`" + diffDict + "` :white_check_mark:"
-    # elif (isinstance(diffDict, dict)):
-    #     for key in diffDict:
-    #         result += f"`{key}: {diffDict[key][0]} --> {diffDict[key][1]}`\n"
-    # else:
-    #     result = "Could not fetch Version information. (From versionDiff.py)"
-    print()
-    client = WebClient(token=slack_bot_token)
-    client.chat_postMessage(channel="#test", text="hello")
+    if(isinstance(diffDict, str)):
+        result = "`" + diffDict + "` :white_check_mark:"
+    elif (isinstance(diffDict, dict)):
+        for key in diffDict:
+            result += f"`{key}: {diffDict[key][0]} --> {diffDict[key][1]}`\n"
+    else:
+        result = "Could not fetch Version information. (From versionDiff.py)"
+
+    client = WebClient(token=slack_bot_token) 
+    client.api_call(
+        api_method='chat.postMessage',
+        json={
+        'channel': '#api-integration-tests',
+        'text': result,
+        'thread_ts': thread_id
+        }
+    )
