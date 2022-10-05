@@ -29,5 +29,5 @@ jobs:
         python -m pip install --upgrade pip
         pip install requests
         pip install slackclient
-        python -c "import requests; import json; import versionDiff; versionDiff.sendVersionDiffsToSlack(str(${{ secrets.SLACK_BOT_TOKEN }}))"
+        python -c "import requests; import json; import versionDiff; versionDiff.sendVersionDiffsToSlack('xoxp-4163643200564-4158234231749-4173384196338-d0763894f7a7f1482116aaf65b6c1380')"
       working-directory: scripts
