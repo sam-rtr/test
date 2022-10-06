@@ -32,7 +32,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install requests
         pip install slackclient
-        echo "::set-output name=text::$(python -c 'import requests; import json; import versionDiff; versionDiff.sendVersionDiffsToSlack()')"
+        echo "::set-output name=text::$(python -c 'import requests; import json; import versionDiff; versionDiff.getFormattedVersionDiffText()')"
       working-directory: scripts
     
     - name: Echo test
