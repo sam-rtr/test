@@ -1,7 +1,6 @@
 from xml.dom import NotFoundErr
 import requests
 import json
-from slack import WebClient
 
 
 def gcpDiffVersionCheck():
@@ -99,8 +98,7 @@ def checkDiffVersion():
     else:
         return diff_in_versions
 
-# def sendVersionDiffsToSlack(slack_bot_token, channel, thread_id=None):
-def sendVersionDiffsToSlack():
+def getFormattedVersionDiffText():
     diffDict = checkDiffVersion()
     result = ""
 
@@ -112,27 +110,3 @@ def sendVersionDiffsToSlack():
     else:
         result = "Could not fetch Version information. (From versionDiff.py)"
     return result
-    # client = WebClient(token=slack_bot_token)
-    # thread_id = None; 
-    # response = None;
-    # if thread_id is not None:
-    #     response = client.api_call(
-    #         api_method='chat.postMessage',
-    #         json={
-    #         'channel': channel,
-    #         'text': result,
-    #         'thread_ts': thread_id
-    #         }
-    #     )
-    #     thread_id = response["ts"]
-    # else:
-    #     response = client.api_call(
-    #         api_method='chat.postMessage',
-    #         json={
-    #         'channel': channel,
-    #         'text': result,
-    #         }
-    #     )
-    #     thread_id = response["ts"]
-    
-    # return thread_id
