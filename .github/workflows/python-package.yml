@@ -57,6 +57,6 @@ jobs:
         slack-function: send-message
         slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_TOKEN }}
         slack-channel: ${{ fromJson(steps.send-success-message.outputs.slack-result).response.channel }}
-        slack-text: "${{ steps.get-diff-version-text.outputs.text }"
+        slack-text: "${{ steps.get-diff-version-text.outputs.text }}"
         slack-optional-thread_ts: ${{ fromJson(steps.send-success-message.outputs.slack-result).response.message.ts }}
 
