@@ -32,8 +32,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install requests
         pip install slackclient
-        python -c "import requests; import json; import versionDiff; 
-        versionDiff.sendVersionDiffsToSlack('${{secrets.SLACK_BOT_TOKEN}}','#test')"
+        python -c "import requests; import json; import versionDiff; versionDiff.sendVersionDiffsToSlack('${{secrets.SLACK_BOT_TOKEN}}','#test')"
       working-directory: scripts
       
     - name: Send Failed Slack Message
