@@ -112,9 +112,10 @@ def sendVersionDiffsToSlack(slack_bot_token, channel, thread_id=None):
         result = "Could not fetch Version information. (From versionDiff.py)"
 
     client = WebClient(token=slack_bot_token)
-    
+    thread_id = None; 
+    response = None;
     if thread_id is not None:
-        client.api_call(
+        response = client.api_call(
             api_method='chat.postMessage',
             json={
             'channel': channel,
@@ -122,11 +123,15 @@ def sendVersionDiffsToSlack(slack_bot_token, channel, thread_id=None):
             'thread_ts': thread_id
             }
         )
+        thread_id = response["ts"]
     else:
-        client.api_call(
+        response = client.api_call(
             api_method='chat.postMessage',
             json={
             'channel': channel,
             'text': result,
             }
         )
+        thread_id = response["ts"]
+    
+    return thread_id
