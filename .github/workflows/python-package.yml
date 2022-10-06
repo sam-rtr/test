@@ -36,7 +36,7 @@ jobs:
       working-directory: scripts
       
     - name: Send Failed Slack Message
-      if: steps.send-version-diff.outcome != 'success'
+      if: steps.send-version-diff.outcome = 'success'
       uses: archive/github-actions-slack@v2.4.0
       id: send-failed-message
       with:
