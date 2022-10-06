@@ -64,11 +64,11 @@ def versionCheck():
                 "http://" + url + "/version").content).replace('b', '')
 
     except requests.exceptions.ConnectionError as errh:
-        print('HTTP Error : ' + errh)
+        print('HTTP Error : ', errh)
     except requests.exceptions.Timeout as errt:
-        print('Timeout Error : ' + errt)
+        print('Timeout Error : ', errt)
     except requests.exceptions.HTTPError as errc:
-        print('Error in Connection : ' + errc)
+        print('Error in Connection : ', errc)
     except requests.exceptions.RequestException as err:
         print("OOps: Something Else", err)
 
