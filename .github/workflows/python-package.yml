@@ -40,7 +40,7 @@ jobs:
         echo "${{ steps.get-diff-version-text.outputs.text }}"
       
     - name: Send Success Slack Message
-      if: steps.send-version-diff.outcome == 'success'
+      if: steps.send-version-diff.outcome != 'success'
       id: send-success-message
       uses: archive/github-actions-slack@v2.4.0
       with:
