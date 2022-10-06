@@ -21,19 +21,19 @@ jobs:
         python-version: [3.9]
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      id: send-version-diff
-      run: |
-        python -m pip install --upgrade pip
-        pip install requests
-        pip install slackclient
-        python -c "import requests; import json; import versionDiff; thread_id = versionDiff.sendVersionDiffsToSlack( '${{ secrets.SLACK_BOT_TOKEN }}', '#test')"
-      working-directory: scripts
+#     - uses: actions/checkout@v3
+#     - name: Set up Python ${{ matrix.python-version }}
+#       uses: actions/setup-python@v3
+#       with:
+#         python-version: ${{ matrix.python-version }}
+#     - name: Install dependencies
+#       id: send-version-diff
+#       run: |
+#         python -m pip install --upgrade pip
+#         pip install requests
+#         pip install slackclient
+#         python -c "import requests; import json; import versionDiff; thread_id = versionDiff.sendVersionDiffsToSlack( '${{ secrets.SLACK_BOT_TOKEN }}', '#test')"
+#       working-directory: scripts
       
     - name: Send Failed Slack Message
       if: steps.send-version-diff.outcome != 'success'
