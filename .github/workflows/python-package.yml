@@ -34,25 +34,29 @@ jobs:
         pip install slackclient
         echo "::set-output name=text::$(python -c 'import requests; import json; import versionDiff; versionDiff.sendVersionDiffsToSlack()')"
       working-directory: scripts
+    
+    - name: Echo test
+      run: |
+        echo "${{ steps.get-diff-version-text.outputs.text }}"
       
-    - name: Send Success Slack Message
-      if: steps.send-version-diff.outcome == 'success'
-      id: send-success-message
-      uses: archive/github-actions-slack@v2.4.0
-      with:
-        slack-function: send-message
-        slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_TOKEN }}
-        slack-optional-icon_emoji: ":fire:"
-        slack-channel: C045T8PT056
-        slack-text: Failed Stable API Test on -  https://github.com/sam-rtr/test/actions/runs/${{ github.run_id }} - Branch - ${{ github.HEAD_REF }}
+#     - name: Send Success Slack Message
+#       if: steps.send-version-diff.outcome == 'success'
+#       id: send-success-message
+#       uses: archive/github-actions-slack@v2.4.0
+#       with:
+#         slack-function: send-message
+#         slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_TOKEN }}
+#         slack-optional-icon_emoji: ":fire:"
+#         slack-channel: C045T8PT056
+#         slack-text: Failed Stable API Test on -  https://github.com/sam-rtr/test/actions/runs/${{ github.run_id }} - Branch - ${{ github.HEAD_REF }}
         
-    - name: Send Thread for Success Test - Version Check
-      uses: archive/github-actions-slack@v2.4.0
-      if: always() && (steps.send-success-message.outcome == 'success')
-      with:
-        slack-function: send-message
-        slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_TOKEN }}
-        slack-channel: ${{ fromJson(steps.send-success-message.outputs.slack-result).response.channel }}
-        slack-text: "${{ steps.get-diff-version-text.outputs.versionDiffText }}"
-        slack-optional-thread_ts: ${{ fromJson(steps.send-success-message.outputs.slack-result).response.message.ts }}
+#     - name: Send Thread for Success Test - Version Check
+#       uses: archive/github-actions-slack@v2.4.0
+#       if: always() && (steps.send-success-message.outcome == 'success')
+#       with:
+#         slack-function: send-message
+#         slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_TOKEN }}
+#         slack-channel: ${{ fromJson(steps.send-success-message.outputs.slack-result).response.channel }}
+#         slack-text: "${{ steps.get-diff-version-text.outputs.versionDiffText }}"
+#         slack-optional-thread_ts: ${{ fromJson(steps.send-success-message.outputs.slack-result).response.message.ts }}
 
