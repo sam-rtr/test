@@ -35,7 +35,7 @@ jobs:
     
     - name: Echo test
       run: |
-        echo $GITHUB_SHA
+        echo "artifactory.rtr.cloud/docker/storefront-acceptance:${GITHUB_SHA}"
       
 #     - name: Send Success Slack Message
 #       if: steps.send-version-diff.outcome != 'success'
