@@ -35,7 +35,7 @@ jobs:
     
     - name: Echo test
       run: |
-        echo "${{ github.GITHUB_SHA }}"
+        echo $GITHUB_SHA
       
 #     - name: Send Success Slack Message
 #       if: steps.send-version-diff.outcome != 'success'
