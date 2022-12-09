@@ -35,6 +35,7 @@ jobs:
     
     - name: Echo test
       run: |
+        echo artifactory.rtr.cloud/docker/storefront-acceptance:${{github.sha}},artifactory.rtr.cloud/docker/storefront-acceptance:latest
         echo "artifactory.rtr.cloud/docker/storefront-acceptance:${GITHUB_SHA}","artifactory.rtr.cloud/docker/storefront-acceptance:latest"
       
 #     - name: Send Success Slack Message
